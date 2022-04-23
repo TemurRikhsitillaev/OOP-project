@@ -4,6 +4,8 @@
 #include <ctype.h>
 using namespace std;
 
+string listOfProducts[] = {"Apple", "Banana", "Pineapple","Cucember","Pencil","Paper","Computer","Coffee","Charger","Table","Mouse","Keyboard"};
+double costOfProducts[] = { 20,100,50,300,300,300,300,300,300,300,300,300 };
 class User {
 private:
     string name;
@@ -174,28 +176,27 @@ void changeName(User* user) {
 class Buy {
 protected:
     int product = 0, numberofProduct, i = 0, totalCost = 0, i1 = 0;
-    char newProduct, pro;
+    char newProduct;
     int addProduct[99];
 public:
     void listofProducts() {
         for (int k = 0; k < 12; k++) {
-            cout<<"\t\t\t\t\t" << k + 1 << ". " << products[k]->getName() << "\t-\t" << products[k]->getPrice() << "$" << endl;
+            cout<<"\t\t\t\t\t" << k + 1 << ". " << listOfProducts[k] << "\t-\t" << costOfProducts[k] << "$" << endl;
         }
     };
     void buyProducts() {
         while (true) {
             cout << "\n\t\t\t\t\t\tEnter product: ";
-            cin >> pro;
-            if (isdigit(pro)) {
-                product = pro - '0';
+            cin >> product;
+            if (product>0 && product<13) {
                 cout << "\n\t\t\t\t\t\tNumber of product: ";
                 cin >> numberofProduct;
-                int a = products[product - 1]->getPrice() * numberofProduct;
+                int a = costOfProducts[product-1] * numberofProduct;
                 cout << "\n\t\t\t\t\t\ta - Add product \n\t\t\t\t\t\tb - Pay\n";
                 cin >> newProduct;
 
                 if (newProduct == 'a') {
-                    addProduct[i] = a;
+                    addProduct[i] = costOfProducts[i];
                     listofProducts();
                     i++;
                 }
