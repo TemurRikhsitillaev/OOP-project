@@ -1,11 +1,8 @@
 #include <iostream>
 #include<windows.h>
 #include<string>
-#include <ctype.h>
 using namespace std;
 
-string listOfProducts[] = {"Apple", "Banana", "Pineapple","Cucember","Pencil","Paper","Computer","Coffee","Charger","Table","Mouse","Keyboard"};
-double costOfProducts[] = { 20,100,50,300,300,300,300,300,300,300,300,300 };
 class User {
 private:
     string name;
@@ -175,28 +172,28 @@ void changeName(User* user) {
 
 class Buy {
 protected:
-    int product = 0, numberofProduct, i = 0, totalCost = 0, i1 = 0;
+    int product, numberofProduct, i = 0, totalCost = 0, i1 = 0;
     char newProduct;
     int addProduct[99];
 public:
     void listofProducts() {
-        for (int k = 0; k < 12; k++) {
-            cout<<"\t\t\t\t\t" << k + 1 << ". " << listOfProducts[k] << "\t-\t" << costOfProducts[k] << "$" << endl;
+        for (int i = 0; i < 12; i++) {
+            cout<<"\t\t\t\t\t" << i + 1 << ". " << products[i]->getName() << "\t-\t" << products[i]->getPrice() << "$" << endl;
         }
     };
     void buyProducts() {
         while (true) {
-            cout << "\n\t\t\t\t\t\tEnter product: ";
+            cout << "\t\t\t\t\tEnter product: ";
             cin >> product;
-            if (product>0 && product<13) {
-                cout << "\n\t\t\t\t\t\tNumber of product: ";
+            if (product > 0 && product < 13) {
+                cout << "\t\t\t\t\tNumber of product: ";
                 cin >> numberofProduct;
-                int a = costOfProducts[product-1] * numberofProduct;
-                cout << "\n\t\t\t\t\t\ta - Add product \n\t\t\t\t\t\tb - Pay\n";
+                int a = products[product - 1]->getPrice() * numberofProduct;
+                cout << "\t\t\t\t\ta - add new product \n\t\t\t\t\tb - pay\n";
                 cin >> newProduct;
 
                 if (newProduct == 'a') {
-                    addProduct[i] = costOfProducts[i];
+                    addProduct[i] = a;
                     listofProducts();
                     i++;
                 }
@@ -205,43 +202,38 @@ public:
                         totalCost += addProduct[i1];
                         i1++;
                     }
-                    cout << "\n\t\t\t\t\t\tCost: " << totalCost + a << " $\n\n" << endl;
+                    cout << "Cost: " << totalCost + a << " $" << endl;
                     Payment();
                     break;
                 }
                 else {
-                    cout << "\t\t\t\t\t\tWrong input, try again!" << endl;
+                    cout << "\n\t\t\t\t\t     Wrong input, try again!\n" << endl;
                     listofProducts();
                 }
             }
-            
             else {
-                cout << "\n\t\t\t\t\t     Wrong input, try again!\n";
+                cout << "\n\t\t\t\t\t     Wrong input, try again!\n" << endl;
             }
         }
     }
     void Payment() {
         char a;
         long p;
-        cout << "\t\t\t\t\t\ta - Cash\n\t\t\t\t\t\tb - Credit Card\n\t\t\t\t\t\tc - Online Wallet\n";
+        cout << "a - Cash\nb - Credit Card\nc - Online Wallet\n";
         cin >> a;
         if (a == 'a') {
-            cout << "\n\n\t\t\t\t\t\t\tThank you!" << endl;
+            cout << "Thank you!" << endl;
         }
         else if (a == 'b') {
-            cout << "\t\t\t\t\t\tEnter the password: ";
+            cout << "Enter the password: ";
             cin >> p;
             Sleep(1000);
-            cout << "\n\t\t\t\t\t\tPayment was successful\n\n\n\t\t\t\t\t\t\tThank you!" << endl;
+            cout << "payment was successful\nThank you!" << endl;
         }
         else if (a == 'c') {
-            cout << "\t\t\t\t\tSend money to 123456789 bank account" << endl;
-            Sleep(4000);
-            cout << "\n\t\t\t\t\t\tPayment was successful\n\n\n\t\t\t\t\t\t\tThank you!" << endl;
-        }
-        else {
-            cout << "\t\t\t\t\t\tWrong input, try again!\n";
-            Payment();
+            cout << "send money to 123456789 bank account" << endl;
+            Sleep(5000);
+            cout << "payment was successful\nThank you!" << endl;
         }
     }
 };
