@@ -1,6 +1,7 @@
 #include <iostream>
 #include<windows.h>
 #include<string>
+#include <ctype.h>
 using namespace std;
 
 class User {
@@ -61,8 +62,8 @@ Product* products[] = {
   new Product("Pencil", 300),
   new Product("Paper", 300),
   new Product("Computer", 300),
-  new Product("Cup", 300),
-  new Product("Pen", 300),
+  new Product("Coffee", 300),
+  new Product("Charger", 300),
   new Product("Table", 300),
   new Product("Mouse", 300),
   new Product("Keyboard", 300)
@@ -172,59 +173,74 @@ void changeName(User* user) {
 
 class Buy {
 protected:
-    int product, numberofProduct, i = 0, totalCost = 0, i1 = 0;
-    char newProduct;
+    int product = 0, numberofProduct, i = 0, totalCost = 0, i1 = 0;
+    char newProduct, pro;
     int addProduct[99];
 public:
     void listofProducts() {
-        for (int i = 0; i < 5; i++) {
-            cout << i + 1 << ". " << products[i]->getName() << " - " << products[i]->getPrice() << "$" << endl;
+        for (int k = 0; k < 12; k++) {
+            cout<<"\t\t\t\t\t" << k + 1 << ". " << products[k]->getName() << "\t-\t" << products[k]->getPrice() << "$" << endl;
         }
     };
     void buyProducts() {
         while (true) {
-            cout << "Enter product: ";
-            cin >> product;
-            cout << "number of product: ";
-            cin >> numberofProduct;
-            int a = products[product - 1]->getPrice() * numberofProduct;
-            cout << "a - add new product \nb - that is all\n";
-            cin >> newProduct;
+            cout << "\n\t\t\t\t\t\tEnter product: ";
+            cin >> pro;
+            if (isdigit(pro)) {
+                product = pro - '0';
+                cout << "\n\t\t\t\t\t\tNumber of product: ";
+                cin >> numberofProduct;
+                int a = products[product - 1]->getPrice() * numberofProduct;
+                cout << "\n\t\t\t\t\t\ta - Add product \n\t\t\t\t\t\tb - Pay\n";
+                cin >> newProduct;
 
-            if (newProduct == 'a') {
-                addProduct[i] = a;
-                listofProducts();
-                i++;
-            }
-            else if (newProduct == 'b') {
-                while (i1 < i) {
-                    totalCost += addProduct[i1];
-                    i1++;
+                if (newProduct == 'a') {
+                    addProduct[i] = a;
+                    listofProducts();
+                    i++;
                 }
-                cout << "Cost: " << totalCost + a << " $" << endl;
-                Payment();
-                break;
+                else if (newProduct == 'b') {
+                    while (i1 < i) {
+                        totalCost += addProduct[i1];
+                        i1++;
+                    }
+                    cout << "\n\t\t\t\t\t\tCost: " << totalCost + a << " $\n\n" << endl;
+                    Payment();
+                    break;
+                }
+                else {
+                    cout << "\t\t\t\t\t\tWrong input, try again!" << endl;
+                    listofProducts();
+                }
+            }
+            
+            else {
+                cout << "\n\t\t\t\t\t     Wrong input, try again!\n";
             }
         }
     }
     void Payment() {
         char a;
         long p;
-        cout << "a - Cash\nb - Credit Card\nc - Online Wallet\n";
+        cout << "\t\t\t\t\t\ta - Cash\n\t\t\t\t\t\tb - Credit Card\n\t\t\t\t\t\tc - Online Wallet\n";
         cin >> a;
         if (a == 'a') {
-            cout << "Thank you!" << endl;
+            cout << "\n\n\t\t\t\t\t\t\tThank you!" << endl;
         }
         else if (a == 'b') {
-            cout << "Enter the password: ";
+            cout << "\t\t\t\t\t\tEnter the password: ";
             cin >> p;
             Sleep(1000);
-            cout << "payment was successful\nThank you!" << endl;
+            cout << "\n\t\t\t\t\t\tPayment was successful\n\n\n\t\t\t\t\t\t\tThank you!" << endl;
         }
         else if (a == 'c') {
-            cout << "send money to 123456789 bank account" << endl;
-            Sleep(5000);
-            cout << "payment was successful\nThank you!" << endl;
+            cout << "\t\t\t\t\tSend money to 123456789 bank account" << endl;
+            Sleep(4000);
+            cout << "\n\t\t\t\t\t\tPayment was successful\n\n\n\t\t\t\t\t\t\tThank you!" << endl;
+        }
+        else {
+            cout << "\t\t\t\t\t\tWrong input, try again!\n";
+            Payment();
         }
     }
 };
