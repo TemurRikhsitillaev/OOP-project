@@ -174,7 +174,7 @@ class Buy {
 protected:
     int product, numberofProduct, i = 0, totalCost = 0, i1 = 0;
     char newProduct;
-    string addProduct;
+    int addProduct[99];
 public:
     void listofProducts() {
         for (int i = 0; i < 5; i++) {
@@ -190,18 +190,18 @@ public:
             int a = products[product - 1]->getPrice() * numberofProduct;
             cout << "a - add new product \nb - that is all\n";
             cin >> newProduct;
-            
+
             if (newProduct == 'a') {
                 addProduct[i] = a;
                 listofProducts();
                 i++;
             }
             else if (newProduct == 'b') {
-                while(i1<i) {
+                while (i1 < i) {
                     totalCost += addProduct[i1];
                     i1++;
                 }
-                cout << "Cost: " << totalCost+a << " $" << endl;
+                cout << "Cost: " << totalCost + a << " $" << endl;
                 Payment();
                 break;
             }
@@ -225,20 +225,6 @@ public:
             cout << "send money to 123456789 bank account" << endl;
             Sleep(5000);
             cout << "payment was successful\nThank you!" << endl;
-        }
-    }
-    void NewProducts(int newProduct) {
-        if (newProduct == 'a') {
-            listofProducts();
-            cout << "Enter product: ";
-            cin >> product;
-            cout << "Enter number of product";
-            cin >> numberofProduct;
-            cout << "a - add new product\nb - end";
-            cin >> newProduct;
-        }
-        else if (newProduct == 'b') {
-            cout << "Cost: " << products[product - 1]->getPrice() * numberofProduct << " $" << endl;
         }
     }
 };
